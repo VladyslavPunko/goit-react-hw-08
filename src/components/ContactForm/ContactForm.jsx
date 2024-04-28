@@ -70,3 +70,5 @@ const ContactForm = () => {
 };
 
 export default ContactForm;
+
+RegistrationPage;
