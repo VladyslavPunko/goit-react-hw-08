@@ -26,5 +26,3 @@ export const { changeFilter } = filtersSlice.actions;
 
 // Редюсер слайсу
 export const filtersReducer = filtersSlice.reducer;
-
-export const selectNameFilter = (state) => state.filters.name;
