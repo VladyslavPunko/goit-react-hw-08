@@ -6,15 +6,16 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import ContactsPage from "./pages/ContactsPage/ContactsPage";
 import NotFound from "./NotFound/NotFound";
 import Layout from "./Layout/Layout";
+import { useEffect } from "react";
+import { refreshUser } from "../redux/auth/operations";
+import { useDispatch } from "react-redux";
 
 function App() {
-  // const dispatch = useDispatch();
-  // const loading = useSelector(selectLoading);
-  // const error = useSelector(selectError);
+  const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch(fetchContacts());
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(refreshUser());
+  }, [dispatch]);
 
   return (
     <>
