@@ -9,6 +9,8 @@ import Layout from "./Layout/Layout";
 import { useEffect } from "react";
 import { refreshUser } from "../redux/auth/operations";
 import { useDispatch } from "react-redux";
+import RestrictedRoute from "./RestrictedRoute/RestrictedRoute";
+import PrivatedRoute from "./PrivateRoute/PrivateRoute";
 
 function App() {
   const dispatch = useDispatch();
@@ -22,9 +24,30 @@ function App() {
       <Layout>
         <Routes>
           <Route path="/" element={<HomePage />}></Route>
-          <Route path="/register" element={<RegistrationPage />}></Route>
-          <Route path="/login" element={<LoginPage />}></Route>
-          <Route path="/contacts" element={<ContactsPage />}></Route>
+          <Route
+            path="/register"
+            element={
+              <RestrictedRoute>
+                <RegistrationPage />
+              </RestrictedRoute>
+            }
+          ></Route>
+          <Route
+            path="/login"
+            element={
+              <RestrictedRoute>
+                <LoginPage />
+              </RestrictedRoute>
+            }
+          ></Route>
+          <Route
+            path="/contacts"
+            element={
+              <PrivatedRoute>
+                <ContactsPage />
+              </PrivatedRoute>
+            }
+          ></Route>
           <Route path="*" element={<NotFound />}></Route>
         </Routes>
       </Layout>
