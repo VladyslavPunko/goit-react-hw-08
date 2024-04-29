@@ -1,23 +1,17 @@
 import * as Yup from "yup";
 import { Form, Formik, Field, ErrorMessage } from "formik";
-import css from "../../ContactForm/ContactForm.module.css";
+import css from "../../components/ContactForm/ContactForm.module.css";
 import { useId } from "react";
-import { register } from "../../../redux/auth/operations";
 
 import { useDispatch } from "react-redux";
+import { login } from "../../redux/auth/operations";
 
 const initialValues = {
-  name: "",
   email: "",
   password: "",
 };
 
-const RegisterSchema = Yup.object().shape({
-  name: Yup.string()
-    .required("Name is required")
-    .min(3, "Too Short!")
-    .max(38, "Too Long!"),
-
+const LoginSchema = Yup.object().shape({
   email: Yup.string()
     .email("You must enter a valid email address")
     .required("Email is required")
@@ -26,15 +20,14 @@ const RegisterSchema = Yup.object().shape({
   password: Yup.string().min(7, "Too Short!").required("Password is required"),
 });
 
-const RegistrationPage = () => {
-  const nameFieldId = useId();
+const LoginPage = () => {
   const numberFieldId = useId();
   const dispatch = useDispatch();
 
   const handleSubmit = (values, actions) => {
     const finalContact = { ...values };
     console.log("finalContact: ", finalContact);
-    dispatch(register(finalContact));
+    dispatch(login(finalContact));
     actions.resetForm();
   };
 
@@ -42,23 +35,11 @@ const RegistrationPage = () => {
     <Formik
       initialValues={initialValues}
       onSubmit={handleSubmit}
-      validationSchema={RegisterSchema}
+      validationSchema={LoginSchema}
     >
       <Form className={css.forms}>
-        <h2>Register user</h2>
+        <h2>Login</h2>
         <div className={css.add}>
-          <label htmlFor={nameFieldId} name="name">
-            Name
-          </label>
-          <Field
-            className={css.inp}
-            type="text"
-            name="name"
-            placeholder="Enter You name"
-          />
-          <ErrorMessage className={css.err} name="name" component="span" />
-          <br />
-
           <label htmlFor={numberFieldId} name="email">
             Email
           </label>
@@ -92,4 +73,4 @@ const RegistrationPage = () => {
   );
 };
 
-export default RegistrationPage;
+export default LoginPage;
