@@ -1,11 +1,11 @@
-.nav {
+.wrapper {
   display: flex;
-  gap: 20px;
-  justify-content: flex-start;
+  align-items: center;
   font-size: 24px;
+  gap: 20px;
 }
 
-.navLink {
+.logOut_button {
   background-color: transparent;
   border: 1px solid #e87438;
   color: #00132c;
@@ -18,17 +18,13 @@
   transition: transform 0.3s ease;
 }
 
-.navLink:hover,
-.navLink:active {
-  outline: 0;
-}
-
-.navLink:hover {
+.logOut_button:hover,
+.logOut_button:active {
   cursor: pointer;
   transform: scale(1.1);
 }
 
-.active {
-  color: rgba(255, 255, 255, 0.712);
-  background-color: rgba(228, 167, 13, 0.712);
+.logOut_button:hover {
+  background-color: transparent;
+  cursor: pointer;
 }

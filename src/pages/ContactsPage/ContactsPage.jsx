@@ -1,16 +1,17 @@
 import { useDispatch, useSelector } from "react-redux";
 import ContactForm from "../../components/ContactForm/ContactForm";
 import ContactList from "../../components/ContactList/ContactList";
+import SearchBox from "../../components/SearchBox/SearchBox";
+import { selectError, selectLoading } from "../../redux/contacts/selectors";
+import Loader from "../../components/Loader/Loader";
 import { useEffect } from "react";
 import { fetchContacts } from "../../redux/contacts/operations";
-import { selectLoading, selectError } from "../../redux/contacts/slice";
-import Loader from "../../components/Loader/Loader";
-import { ErrorMessage } from "formik";
+import { Helmet } from "react-helmet-async";
 
 const ContactsPage = () => {
   const dispatch = useDispatch();
-  const isLoading = useSelector(selectLoading);
-  const isError = useSelector(selectError);
+  const loading = useSelector(selectLoading);
+  const error = useSelector(selectError);
 
   useEffect(() => {
     dispatch(fetchContacts());
@@ -18,10 +19,13 @@ const ContactsPage = () => {
 
   return (
     <>
-      {isLoading && <Loader />}
-      {isError && <ErrorMessage />}
+      <Helmet>
+        <title>Contact Page</title>
+      </Helmet>
+      <h1>Your contacts</h1>
       <ContactForm />
-      <ContactList />
+      <SearchBox />
+      {loading && !error ? <Loader /> : <ContactList />}
     </>
   );
 };

@@ -1,20 +1,20 @@
 import { useSelector } from "react-redux";
-import Loader from "../../components/Loader/Loader";
-import LoginForm from "../../components/LoginForm/LoginForm";
+import RegistrationForm from "../../components/RegistrationForm/RegistrationForm";
 import { selectIsError, selectIsLoading } from "../../redux/auth/slectors";
+import Loader from "../../components/Loader/Loader";
 import { Helmet } from "react-helmet-async";
 
-const LoginPage = () => {
+const RegisterPage = () => {
   const loading = useSelector(selectIsLoading);
   const error = useSelector(selectIsError);
   return (
     <>
       <Helmet>
-        <title>Login Page</title>
+        <title>Register Page</title>
       </Helmet>
-      {loading && !error ? <Loader /> : <LoginForm />}
+      {loading && !error ? <Loader /> : <RegistrationForm />}
     </>
   );
 };
 
-export default LoginPage;
+export default RegisterPage;

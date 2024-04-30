@@ -1,24 +1,45 @@
 body {
-  margin: 0;
+  font-family: "DM Sans", sans-serif;
+  background-color: #e1e0e9;
+  color: #e87438;
 }
 
-body {
-  font-family: sans-serif;
-  line-height: 1.5;
+button {
+  color: inherit;
+  cursor: pointer;
 }
 
-h1 h2,
+ul {
+  list-style-type: none;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-left: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+h1,
+h2,
 h3,
 h4,
-h5,
-h6,
 p {
-  margin: 0;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
-ul,
-li {
-  margin: 0;
-  padding: 0;
-  list-style: none;
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-text-fill-color: rgb(71, 71, 71);
+  -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+  transition: background-color 5000s ease-in-out 0s;
 }

@@ -1,0 +1,31 @@
+.wrapper {
+  display: flex;
+  justify-content: flex-start;
+  background-color: transparent;
+  border: 1px solid #e87438;
+  color: #00132c;
+  font-weight: 700;
+  line-height: 24px;
+  padding: 16px 23px;
+  position: relative;
+  text-decoration: none;
+  border-radius: 20px;
+  margin-top: 50px;
+}
+
+.title {
+  font-size: 36px;
+  margin: auto;
+  line-height: normal;
+  color: #e87438;
+}
+
+.image {
+  background-image: url(../../../public//welcome.jpeg);
+  background-position: 100%;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  padding-bottom: 500px;
+  width: 100%;
+  border-radius: 20px;
+}

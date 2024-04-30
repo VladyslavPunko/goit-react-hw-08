@@ -2,24 +2,26 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  border: 1px solid black;
-  padding: 5px;
-  border-radius: 8px;
-  width: 300px;
-  height: 150px;
   gap: 10px;
 }
 
 .delete_button {
-  height: 30px;
-  border: none;
-  border-radius: 8px;
-  font-weight: 500;
-  margin-top: 30 px;
+  font-size: 16px;
+  font-weight: 500px;
+  letter-spacing: 1px;
+  padding: 10px 20px 13px;
+  outline: 0;
+  border: 1px solid #e87438;
+  cursor: pointer;
+  position: relative;
+  background-color: rgba(0, 0, 0, 0);
+  border-radius: 20px;
+  color: black;
+  transition: transform 0.3s ease;
+  color: #e87438;
 }
 
+.delete_button:focus,
 .delete_button:hover {
-  background-color: rgb(99, 99, 141);
-  transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
-  border: 1px solid black;
+  transform: scale(1.1);
 }

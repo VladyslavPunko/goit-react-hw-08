@@ -1,13 +1,14 @@
-.nav {
+.wrapper {
   display: flex;
   gap: 20px;
-  justify-content: flex-start;
+  justify-content: flex-end;
   font-size: 24px;
 }
 
 .navLink {
+  color: #000000;
   background-color: transparent;
-  border: 1px solid #e87438;
+  border: 1px solid #433a46ab;
   color: #00132c;
   font-weight: 700;
   line-height: 24px;

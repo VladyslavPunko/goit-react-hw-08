@@ -1,7 +1,9 @@
-import { createSelector, createSlice } from "@reduxjs/toolkit";
-import { fetchContacts, addContact, deleteContact } from "./operations";
+import { createSlice } from "@reduxjs/toolkit";
+import { changeContact, fetchContacts } from "./operations";
+import { addContact, deleteContact } from "./operations";
+import toast from "react-hot-toast";
 
-const INITIAL_STATE = {
+export const INITIAL_STATE = {
   contacts: {
     items: [],
     loading: false,
@@ -12,57 +14,71 @@ const INITIAL_STATE = {
   },
 };
 
-const handelPending = (state) => {
-  state.loading = true;
-};
-
-const handelRejected = (state, action) => {
+const handleRejected = (state) => {
   state.loading = false;
-  state.error = action.payload;
+  state.error = true;
 };
 
-const conttactsSlice = createSlice({
+const handlePending = (state) => {
+  state.loading = true;
+  state.error = false;
+};
+
+const slice = createSlice({
   name: "contacts",
   initialState: INITIAL_STATE.contacts,
+
   extraReducers: (builder) => {
     builder
-      .addCase(fetchContacts.pending, handelPending)
+      .addCase(fetchContacts.pending, handlePending)
+      .addCase(addContact.pending, handlePending)
+      .addCase(deleteContact.pending, handlePending)
+      .addCase(changeContact.pending, handlePending)
+
       .addCase(fetchContacts.fulfilled, (state, action) => {
         state.loading = false;
         state.items = action.payload;
       })
-      .addCase(fetchContacts.rejected, handelRejected)
-      .addCase(addContact.pending, handelPending)
       .addCase(addContact.fulfilled, (state, action) => {
         state.loading = false;
         state.items.push(action.payload);
+        toast("You add a new contact!", {
+          style: {
+            borderRadius: "10px",
+            background: "rgb(144, 26, 228)",
+            color: "#fff",
+          },
+        });
       })
-      .addCase(addContact.rejected, handelRejected)
-      .addCase(deleteContact.pending, handelPending)
       .addCase(deleteContact.fulfilled, (state, action) => {
         state.loading = false;
         state.items = state.items.filter(
           (item) => item.id !== action.payload.id
         );
+        toast(`You deleted ${action.payload.name}!`, {
+          style: {
+            borderRadius: "10px",
+            background: "rgb(144, 26, 228)",
+            color: "#fff",
+          },
+        });
       })
-      .addCase(deleteContact.rejected, handelRejected);
+
+      .addCase(changeContact.fulfilled, (state, action) => {
+        state.loading = false;
+        const index = state.items.findIndex(
+          (contact) => contact.id === action.payload.id
+        );
+        if (index !== -1) {
+          state.items[index] = action.payload;
+        }
+      })
+
+      .addCase(changeContact.rejected, handleRejected)
+      .addCase(fetchContacts.rejected, handleRejected)
+      .addCase(addContact.rejected, handleRejected)
+      .addCase(deleteContact.rejected, handleRejected);
   },
 });
 
-export const selectContacts = (state) => state.contacts.items;
-export const selectLoading = (state) => state.contacts.loading;
-export const selectError = (state) => state.contacts.error;
-export const selectNameFilter = (state) => state.filters.name;
-
-export const selectFilteredContacts = createSelector(
-  [selectContacts, selectNameFilter],
-  (contacts, filters) => {
-    return contacts.filter((contact) =>
-      contact.name.toLowerCase().includes(filters.toLowerCase())
-    );
-  }
-);
-// Редюсер слайсу
-export const contactsReducer = conttactsSlice.reducer;
-
-// export const selectContacts = (state) => state.contacts.items;
+export const contactsReducer = slice.reducer;

@@ -1,16 +1,18 @@
 import "./App.css";
-import { Route, Routes } from "react-router-dom";
-import HomePage from "../pages/HomePage/HomePage";
-import RegistrationPage from "../pages/RegistrationPage/RegistrationPage";
-import LoginPage from "../pages/LoginPage/LoginPage";
-import ContactsPage from "../pages/ContactsPage/ContactsPage";
-import NotFound from "./NotFound/NotFound";
-import Layout from "./Layout/Layout";
-import { useEffect } from "react";
-import { refreshUser } from "../redux/auth/operations";
 import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { lazy } from "react";
+import Layout from "./Layout/Layout";
+import { Route, Routes } from "react-router-dom";
+import { refreshUser } from "../redux/auth/operations";
+import NoFoundPage from "../pages/NoFoundPage/NoFoundPage";
 import RestrictedRoute from "./RestrictedRoute/RestrictedRoute";
-import PrivatedRoute from "./PrivateRoute/PrivateRoute";
+import PrivateRoute from "./PrivateRoute/PrivateRoute";
+
+const HomePage = lazy(() => import("../pages/HomePage/HomePage"));
+const RegisterPage = lazy(() => import("../pages/RegisterPage/RegisterPage"));
+const LoginPage = lazy(() => import("../pages/LoginPage/LoginPage"));
+const ContactsPage = lazy(() => import("../pages/ContactsPage/ContactsPage"));
 
 function App() {
   const dispatch = useDispatch();
@@ -23,15 +25,15 @@ function App() {
     <>
       <Layout>
         <Routes>
-          <Route path="/" element={<HomePage />}></Route>
+          <Route path="/" element={<HomePage />} />
           <Route
             path="/register"
             element={
               <RestrictedRoute>
-                <RegistrationPage />
+                <RegisterPage />
               </RestrictedRoute>
             }
-          ></Route>
+          />
           <Route
             path="/login"
             element={
@@ -39,16 +41,16 @@ function App() {
                 <LoginPage />
               </RestrictedRoute>
             }
-          ></Route>
+          />
           <Route
             path="/contacts"
             element={
-              <PrivatedRoute>
+              <PrivateRoute>
                 <ContactsPage />
-              </PrivatedRoute>
+              </PrivateRoute>
             }
-          ></Route>
-          <Route path="*" element={<NotFound />}></Route>
+          />
+          <Route path="*" element={<NoFoundPage />} />
         </Routes>
       </Layout>
     </>
