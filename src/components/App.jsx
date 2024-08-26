@@ -5,32 +5,52 @@ import { lazy } from "react";
 import Layout from "./Layout/Layout";
 import { Route, Routes } from "react-router-dom";
 import { refreshUser } from "../redux/auth/operations";
-import NoFoundPage from "../pages/NoFoundPage/NoFoundPagп
+import NoFoundPage from "../pages/NoFoundPage/NoFoundPage";
 import RestrictedRoute from "./RestrictedRoute/RestrictedRoute";
-import PrivateRoute from "./PrivateRoute/PrivateRoute";ваі
+import PrivateRoute from "./PrivateRoute/PrivateRoute";
+
+const HomePage = lazy(() => import("../pages/HomePage/HomePage"));
+const RegisterPage = lazy(() => import("../pages/RegisterPage/RegisterPage"));
 const LoginPage = lazy(() => import("../pages/LoginPage/LoginPage"));
-const ContactsPage = lazy(() => import("../pagesвіапа
-  const dispatch = useDispatch();п
+const ContactsPage = lazy(() => import("../pages/ContactsPage/ContactsPage"));
+
+function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(refreshUser());
+  }, [dispatch]);
+
   return (
-    <>чясмчясмячслмтчясмочстямщоячситщячосрмтищчоясмитчсщяомитчсщм
-      чсямщхлячсмоьзчясшмтячсмшл
-      чсмлщячсшзмячстшмл
+    <>
       <Layout>
-        <Routes>авіпвіапіваіпв
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route
+            path="/register"
             element={
               <RestrictedRoute>
                 <RegisterPage />
-              </RestrictedRoute>пвіапаів
+              </RestrictedRoute>
+            }
+          />
+          <Route
+            path="/login"
             element={
               <RestrictedRoute>
                 <LoginPage />
               </RestrictedRoute>
-            }віа
+            }
+          />
+          <Route
+            path="/contacts"
+            element={
               <PrivateRoute>
                 <ContactsPage />
               </PrivateRoute>
-            }ваі
-          <Route path="*" element={<NoFoundPage />} />п
+            }
+          />
+          <Route path="*" element={<NoFoundPage />} />
         </Routes>
       </Layout>
     </>
