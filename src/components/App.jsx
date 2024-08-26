@@ -5,52 +5,30 @@ import { lazy } from "react";
 import Layout from "./Layout/Layout";
 import { Route, Routes } from "react-router-dom";
 import { refreshUser } from "../redux/auth/operations";
-import NoFoundPage from "../pages/NoFoundPage/NoFoundPage";
+import NoFoundPage from "../pages/NoFoundPage/NoFoundPagп
 import RestrictedRoute from "./RestrictedRoute/RestrictedRoute";
-import PrivateRoute from "./PrivateRoute/PrivateRoute";
-
-const HomePage = lazy(() => import("../pages/HomePage/HomePage"));
-const RegisterPage = lazy(() => import("../pages/RegisterPage/RegisterPage"));
+import PrivateRoute from "./PrivateRoute/PrivateRoute";ваі
 const LoginPage = lazy(() => import("../pages/LoginPage/LoginPage"));
-const ContactsPage = lazy(() => import("../pages/ContactsPage/ContactsPage"));
-
-function App() {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(refreshUser());
-  }, [dispatch]);
-
+const ContactsPage = lazy(() => import("../pagesвіапа
+  const dispatch = useDispatch();п
   return (
     <>
       <Layout>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route
-            path="/register"
+        <Routes>авіпвіапіваіпв
             element={
               <RestrictedRoute>
                 <RegisterPage />
-              </RestrictedRoute>
-            }
-          />
-          <Route
-            path="/login"
+              </RestrictedRoute>пвіапаів
             element={
               <RestrictedRoute>
                 <LoginPage />
               </RestrictedRoute>
-            }
-          />
-          <Route
-            path="/contacts"
-            element={
+            }віа
               <PrivateRoute>
                 <ContactsPage />
               </PrivateRoute>
-            }
-          />
-          <Route path="*" element={<NoFoundPage />} />
+            }ваі
+          <Route path="*" element={<NoFoundPage />} />п
         </Routes>
       </Layout>
     </>
